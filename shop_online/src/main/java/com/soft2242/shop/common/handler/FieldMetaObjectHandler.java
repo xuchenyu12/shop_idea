@@ -17,6 +17,7 @@ class FieldMetaObjectHandler implements MetaObjectHandler {
 //        创建时间
         strictInsertFill(metaObject, Constant.CREATE_TIME, LocalDateTime.class, LocalDateTime.now());
 //        更新时间
+
         strictInsertFill(metaObject, Constant.UPDATE_TIME, LocalDateTime.class, LocalDateTime.now());
 //        逻辑删除
         strictInsertFill(metaObject, Constant.DELETE_FLAG, Integer.class, 0);
