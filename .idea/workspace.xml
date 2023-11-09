@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="cf6d8cff-55aa-4361-8057-65f6b4b6db28" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shop_online/src/main/java/com/soft2242/shop/common/utils/MybatisGen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop_online/src/main/java/com/soft/shop/ShopOnlineApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/shop_online/src/main/java/com/soft2242/shop/ShopOnlineApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop_online/src/main/java/com/soft/shop/common/exception/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/shop_online/src/main/java/com/soft2242/shop/common/exception/ErrorCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop_online/src/main/java/com/soft/shop/common/exception/ServerException.java" beforeDir="false" afterPath="$PROJECT_DIR$/shop_online/src/main/java/com/soft2242/shop/common/exception/ServerException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop_online/src/main/java/com/soft/shop/common/exception/ServerExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/shop_online/src/main/java/com/soft2242/shop/common/exception/ServerExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop_online/src/main/java/com/soft/shop/common/result/PageResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/shop_online/src/main/java/com/soft2242/shop/common/result/PageResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop_online/src/main/java/com/soft/shop/common/result/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/shop_online/src/main/java/com/soft2242/shop/common/result/Result.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop_online/src/main/java/com/soft/shop/constant/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/shop_online/src/main/java/com/soft2242/shop/constant/Constant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop_online/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/shop_online/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop_online/src/test/java/com/soft/shop/ShopOnlineApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/shop_online/src/test/java/com/soft2242/shop/ShopOnlineApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/shop_online/pom.xml" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/shop_online/src/main/java/com/soft/shop/ShopOnlineApplication.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\apache-maven-3.9.5\repository" />
+        <option name="mavenHome" value="$PROJECT_DIR$/../../apache-maven-3.9.5" />
+        <option name="userSettingsFile" value="D:\apache-maven-3.9.5\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2XnlAKQwDF9TB0h4tHoqGka9FLr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/shixun/shop/shop_online",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\shixun\shop\shop_online\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.com.soft2242.shop.common.utils.MybatisGen">
+    <configuration name="MybatisGen" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.soft.shop.common.utils.MybatisGen" />
+      <module name="shop_online" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.soft.shop.common.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.soft2242.shop.common.utils.MybatisGen" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.soft2242.shop.common.utils.MybatisGen" />
+      <module name="shop_online" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.soft2242.shop.common.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShopOnlineApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="shop_online" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.soft2242.shop.ShopOnlineApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.soft2242.shop.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShopOnlineApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="shop_online" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.soft.shop.ShopOnlineApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.com.soft2242.shop.common.utils.MybatisGen" />
+        <item itemvalue="Spring Boot.ShopOnlineApplication (1)" />
+        <item itemvalue="Application.MybatisGen" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="cf6d8cff-55aa-4361-8057-65f6b4b6db28" name="Changes" comment="" />
+      <created>1699272580367</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699272580367</updated>
+      <workItem from="1699272581430" duration="2918000" />
+      <workItem from="1699276044461" duration="1779000" />
+      <workItem from="1699401781471" duration="11333000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
