@@ -22,6 +22,7 @@ import java.util.List;
  * @author xuchenyu12
  * @since 2023-11-08
  */
+
 @Service
 public class UserShippingAddressServiceImpl extends ServiceImpl<UserShippingAddressMapper, UserShippingAddress> implements UserShippingAddressService {
 

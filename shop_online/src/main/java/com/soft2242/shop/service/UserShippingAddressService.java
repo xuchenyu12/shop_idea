@@ -14,5 +14,6 @@ import com.soft2242.shop.vo.AddressVO;
  */
 public interface UserShippingAddressService extends IService<UserShippingAddress> {
 
+
     Integer saveShippingAddress(AddressVO addressVO);
 }

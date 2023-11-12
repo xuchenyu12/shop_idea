@@ -31,6 +31,7 @@ import static com.soft2242.shop.common.utils.ObtainUserIdUtils.getUserId;
 public class UserShippingAddressController {
     private final UserShippingAddressService userShippingAddressService;
 
+
     @Operation(summary = "添加收货地址")
     @PostMapping("address")
     public Result<Integer> saveAddress(@RequestBody @Validated AddressVO addressVO, HttpServletRequest request) {
