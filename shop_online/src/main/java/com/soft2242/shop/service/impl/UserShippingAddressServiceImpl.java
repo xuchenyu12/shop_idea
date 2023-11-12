@@ -38,4 +38,21 @@ public class UserShippingAddressServiceImpl extends ServiceImpl<UserShippingAddr
         save(convert);
         return convert.getId();
     }
+    @Override
+    public Integer editShoppingAddress(AddressVO addressVO) {
+        UserShippingAddress userShippingAddress = baseMapper.selectById(addressVO.getId());
+        if (userShippingAddress == null){
+            throw new ServerException("地址不存在");
+        }
+        if (addressVO.getIsDefault() == AddressDefaultEnum.DEFAULT_ADDRESS.getValue()){
+            UserShippingAddress address = baseMapper.selectOne(new LambdaQueryWrapper<UserShippingAddress>().eq(UserShippingAddress::getUserId, addressVO.getUserId()).eq(UserShippingAddress::getIsDefault, AddressDefaultEnum.DEFAULT_ADDRESS.getValue()));
+            if (address != null){
+                address.setIsDefault(AddressDefaultEnum.NOT_DEFAULT_ADDRESS.getValue());
+                updateById(address);
+            }
+        }
+        UserShippingAddress address = AddressConvert.INSTANCE.convert(addressVO);
+        updateById(address);
+        return address.getId();
+    }
 }

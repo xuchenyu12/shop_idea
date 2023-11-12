@@ -16,4 +16,6 @@ public interface UserShippingAddressService extends IService<UserShippingAddress
 
 
     Integer saveShippingAddress(AddressVO addressVO);
+
+    Integer editShoppingAddress(AddressVO addressVO);
 }
