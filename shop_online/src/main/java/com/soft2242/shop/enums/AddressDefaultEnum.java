@@ -1,5 +1,6 @@
 package com.soft2242.shop.enums;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

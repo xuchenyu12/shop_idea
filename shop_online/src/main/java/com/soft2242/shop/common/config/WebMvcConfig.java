@@ -21,5 +21,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(getAuthorizationInterceptor())
                 .addPathPatterns("/user/profile/**")
                 .addPathPatterns("/member/**");
+        registry.addInterceptor(getAuthorizationInterceptor())
+                .addPathPatterns("/user/profile/**")
+               .addPathPatterns("/member/**");
     }
 }
