@@ -7,6 +7,7 @@ import com.soft2242.shop.common.exception.ServerException;
 import com.soft2242.shop.convert.AddressConvert;
 import com.soft2242.shop.entity.UserShippingAddress;
 import com.soft2242.shop.enums.AddressDefaultEnum;
+import com.soft2242.shop.enums.AddressDeleteFlagEnum;
 import com.soft2242.shop.mapper.UserShippingAddressMapper;
 import com.soft2242.shop.service.UserShippingAddressService;
 import com.soft2242.shop.vo.AddressVO;
@@ -25,7 +26,7 @@ import java.util.List;
 
 @Service
 public class UserShippingAddressServiceImpl extends ServiceImpl<UserShippingAddressMapper, UserShippingAddress> implements UserShippingAddressService {
-
+//添加收货地址
     @Override
     public Integer saveShippingAddress(AddressVO addressVO) {
         UserShippingAddress convert = AddressConvert.INSTANCE.convert(addressVO);
@@ -38,6 +39,7 @@ public class UserShippingAddressServiceImpl extends ServiceImpl<UserShippingAddr
         save(convert);
         return convert.getId();
     }
+    //修改收货地址
     @Override
     public Integer editShoppingAddress(AddressVO addressVO) {
         UserShippingAddress userShippingAddress = baseMapper.selectById(addressVO.getId());
@@ -54,5 +56,31 @@ public class UserShippingAddressServiceImpl extends ServiceImpl<UserShippingAddr
         UserShippingAddress address = AddressConvert.INSTANCE.convert(addressVO);
         updateById(address);
         return address.getId();
+    }
+    @Override
+    public List<AddressVO> putShippingList(Integer userId) {
+        List<UserShippingAddress> list = baseMapper.selectList(new LambdaQueryWrapper<UserShippingAddress>().eq(UserShippingAddress::getUserId, userId));
+        return AddressConvert.INSTANCE.convertToAddressVOList(list);
+    }
+    @Override
+    public AddressVO getShippingAddress(Integer id) {
+        UserShippingAddress address = baseMapper.selectById(id);
+        return AddressConvert.INSTANCE.convertToAddressVO(address);
+    }
+
+    @Override
+    public void deleteShippingAddress(Integer id) {
+        UserShippingAddress address = baseMapper.selectById(id);
+        if (address == null){
+            throw new ServerException("地址不存在");
+        }
+        if (address.getIsDefault() == AddressDefaultEnum.DEFAULT_ADDRESS.getValue()){
+            throw new ServerException("默认地址不能删除");
+        }else {
+            UserShippingAddress updateAddress = new UserShippingAddress();
+            updateAddress.setId(id);
+            updateAddress.setDeleteFlag(AddressDeleteFlagEnum.DELETE_ADDRESS.getValue());
+            baseMapper.update(updateAddress, new LambdaQueryWrapper<UserShippingAddress>().eq(UserShippingAddress::getId, id));
+        }
     }
 }
