@@ -12,9 +12,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 
 import static com.soft2242.shop.common.utils.ObtainUserIdUtils.getUserId;
+
 
 /**
  * <p>
@@ -26,7 +28,7 @@ import static com.soft2242.shop.common.utils.ObtainUserIdUtils.getUserId;
  */
 @Tag(name = "地址管理")
 @RestController
-@RequestMapping({"/shop/userShippingAddress"})
+@RequestMapping({"/member"})
 @AllArgsConstructor
 public class UserShippingAddressController {
     private final UserShippingAddressService userShippingAddressService;
@@ -52,7 +54,8 @@ public class UserShippingAddressController {
     }
     @Operation(summary = "收货地址列表")
     @GetMapping("address")
-    public Result<List<AddressVO>> putAddressList(@RequestParam Integer userId) {
+    public Result<List<AddressVO>> putAddressList(HttpServletRequest request) {
+        Integer userId = getUserId(request);
         List<AddressVO> addressList = userShippingAddressService.putShippingList(userId);
         return Result.ok(addressList);
     }

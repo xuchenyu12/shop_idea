@@ -4,7 +4,8 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.soft2242.shop.entity.Goods;
 import com.soft2242.shop.vo.GoodsVO;
 import com.soft2242.shop.vo.RecommendGoodsVO;
-import org.apache.ibatis.annotations.Mapper;
+
+import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
