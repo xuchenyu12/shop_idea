@@ -1,8 +1,10 @@
 package com.soft2242.shop.service.impl;
 
 import com.soft2242.shop.common.exception.ServerException;
+import com.soft2242.shop.entity.Category;
 import com.soft2242.shop.entity.Goods;
 import com.soft2242.shop.entity.UserShoppingCart;
+import com.soft2242.shop.mapper.CategoryMapper;
 import com.soft2242.shop.mapper.GoodsMapper;
 import com.soft2242.shop.mapper.UserShoppingCartMapper;
 import com.soft2242.shop.query.CartQuery;
@@ -13,6 +15,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.security.PublicKey;
+import java.util.List;
 
 /**
  * <p>
@@ -59,4 +62,11 @@ public class UserShoppingCartServiceImpl extends ServiceImpl<UserShoppingCartMap
         goodsVO.setDiscount(goods.getDiscount());
 
         return goodsVO;
-    }}
+    }
+    //
+    @Override
+    public List<CartGoodsVO> shopCartList(Integer userId){
+        List<CartGoodsVO> list=baseMapper.getCartGoodsInfo(userId);
+        return list;
+    }
+}
