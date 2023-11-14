@@ -83,4 +83,5 @@ public class UserShippingAddressServiceImpl extends ServiceImpl<UserShippingAddr
             baseMapper.update(updateAddress, new LambdaQueryWrapper<UserShippingAddress>().eq(UserShippingAddress::getId, id));
         }
     }
+
 }

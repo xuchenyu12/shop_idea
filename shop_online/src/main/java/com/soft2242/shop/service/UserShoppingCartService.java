@@ -3,6 +3,7 @@ package com.soft2242.shop.service;
 import com.soft2242.shop.entity.UserShoppingCart;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.soft2242.shop.query.CartQuery;
+import com.soft2242.shop.query.EditCartQuery;
 import com.soft2242.shop.vo.CartGoodsVO;
 import io.swagger.models.auth.In;
 
@@ -19,4 +20,7 @@ import java.util.List;
 public interface UserShoppingCartService extends IService<UserShoppingCart> {
 CartGoodsVO addShopCart(CartQuery query);
 List<CartGoodsVO> shopCartList(Integer UserID);
+CartGoodsVO editCart(EditCartQuery query);
+void removeCartGoods(Integer useId,List<Integer> ids);
+    void editCartSelected(Boolean selected,Integer userId);
 }
