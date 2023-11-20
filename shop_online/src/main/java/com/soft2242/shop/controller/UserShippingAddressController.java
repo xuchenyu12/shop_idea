@@ -66,12 +66,20 @@ public class UserShippingAddressController {
         return Result.ok(address);
     }
 
+//    @Operation(summary = "删除收货地址")
+//    @DeleteMapping("address")
+//    public Result deleteAddress(@RequestParam Integer id) {
+//        userShippingAddressService.deleteShippingAddress(id);
+//        return Result.ok();
+//    }
+
     @Operation(summary = "删除收货地址")
     @DeleteMapping("address")
-    public Result deleteAddress(@RequestParam Integer id) {
-        userShippingAddressService.deleteShippingAddress(id);
+    public Result removeAddress(@RequestParam Integer id, HttpServletRequest request) {
+        if (id == null) {
+            throw new ServerException("请求参数不能为空");
+        }
+        userShippingAddressService.removeShippingAddress(id);
         return Result.ok();
     }
-
-
 }

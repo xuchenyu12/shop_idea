@@ -26,5 +26,7 @@ public interface UserShippingAddressService extends IService<UserShippingAddress
 
     AddressVO getShippingAddress(Integer id);
 
-    void deleteShippingAddress(Integer id);
+   // void deleteShippingAddress(Integer id);
+
+    void removeShippingAddress(Integer id);
 }

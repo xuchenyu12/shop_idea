@@ -69,19 +69,28 @@ public class UserShippingAddressServiceImpl extends ServiceImpl<UserShippingAddr
     }
 
     @Override
-    public void deleteShippingAddress(Integer id) {
-        UserShippingAddress address = baseMapper.selectById(id);
-        if (address == null){
-            throw new ServerException("地址不存在");
-        }
-        if (address.getIsDefault() == AddressDefaultEnum.DEFAULT_ADDRESS.getValue()){
-            throw new ServerException("默认地址不能删除");
-        }else {
-            UserShippingAddress updateAddress = new UserShippingAddress();
-            updateAddress.setId(id);
-            updateAddress.setDeleteFlag(AddressDeleteFlagEnum.DELETE_ADDRESS.getValue());
-            baseMapper.update(updateAddress, new LambdaQueryWrapper<UserShippingAddress>().eq(UserShippingAddress::getId, id));
-        }
+    public void removeShippingAddress(Integer id) {
+        removeById(id);
     }
+
+
+//    @Override
+//    public void deleteShippingAddress(Integer id) {
+//        UserShippingAddress address = baseMapper.selectById(id);
+//        if (address == null){
+//            throw new ServerException("地址不存在");
+//        }
+//        if (address.getIsDefault() == AddressDefaultEnum.DEFAULT_ADDRESS.getValue()){
+//            throw new ServerException("默认地址不能删除");
+//        }else {
+//            UserShippingAddress updateAddress = new UserShippingAddress();
+//            updateAddress.setId(id);
+//            updateAddress.setDeleteFlag(AddressDeleteFlagEnum.DELETE_ADDRESS.getValue());
+//            baseMapper.update(updateAddress, new LambdaQueryWrapper<UserShippingAddress>().eq(UserShippingAddress::getId, id));
+//        }
+//    }
+
+
+
 
 }

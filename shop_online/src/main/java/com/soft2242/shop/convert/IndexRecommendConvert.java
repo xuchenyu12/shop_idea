@@ -3,10 +3,9 @@ package com.soft2242.shop.convert;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.soft2242.shop.entity.IndexRecommend;
 import com.soft2242.shop.vo.IndexRecommendVO;
-
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,9 +15,7 @@ public interface IndexRecommendConvert {
     IndexRecommendConvert INSTANCE = Mappers.getMapper(IndexRecommendConvert.class);
 
     @Mapping(expression = "java(MapStruct.strToList(indexRecommend.getPictures()))", target = "pictures")
-    default IndexRecommendVO convertToIndexRecommendVo(IndexRecommend indexRecommend) {
-        return null;
-    }
+    IndexRecommendVO convertToIndexRecommendVo(IndexRecommend indexRecommend);
 
     List<IndexRecommendVO> convertToUserVoList(List<IndexRecommend> list);
 
