@@ -33,5 +33,5 @@ public OrderDetailVO getOrderDetail(Integer id);
     PageResult<OrderDetailVO> getOrderList(OrderQuery query);
     OrderDetailVO cancelOrder(CancelGoodsQuery query);
     void deleteOrder(List<Integer> ids, Integer userId);
-
+    void payOrder(Integer id);
 }
