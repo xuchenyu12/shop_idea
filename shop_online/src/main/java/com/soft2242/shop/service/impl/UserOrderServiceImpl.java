@@ -1,7 +1,9 @@
 package com.soft2242.shop.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.soft2242.shop.common.exception.ServerException;
+import com.soft2242.shop.common.result.PageResult;
 import com.soft2242.shop.convert.UserAddressConvert;
 import com.soft2242.shop.convert.UserOrderDetailConvert;
 import com.soft2242.shop.entity.*;
@@ -9,6 +11,7 @@ import com.soft2242.shop.enums.OrderStatusEnum;
 import com.soft2242.shop.mapper.*;
 import com.soft2242.shop.query.OrderGoodsQuery;
 import com.soft2242.shop.query.OrderPreQuery;
+import com.soft2242.shop.query.OrderQuery;
 import com.soft2242.shop.service.UserOrderGoodsService;
 import com.soft2242.shop.service.UserOrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -42,10 +45,11 @@ import java.util.stream.Collectors;
 public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder> implements UserOrderService {
     @Autowired
     private GoodsMapper goodsMapper;
-
-    private UserShoppingCartMapper userShoppingCartMapper;
+    @Autowired
+    private UserShoppingCartMapper  userShoppingCartMapper;
+    @Autowired
     private UserShippingAddressMapper userShippingAddressMapper;
-
+    @Autowired
     private UserOrderGoodsMapper userOrderGoodsMapper;
 
 
@@ -54,6 +58,7 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
 
     private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
     private ScheduledFuture<?> cancelTask;
+
 
 
     @Async
@@ -84,7 +89,7 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
         userOrder.setOrderNumber(UUID.randomUUID().toString());
         userOrder.setDeliveryTimeType(orderVO.getDeliveryType());
 
-        userOrder.setStatus(OrderStatusEnum.WAITING_FOR_REVIEW.getValue());
+        userOrder.setStatus(OrderStatusEnum.WAITING_FOR_PAYMENT.getValue());
         if (orderVO.getBuyerMessage() != null){
             userOrder.setBuyerMessage(orderVO.getBuyerMessage());
         }
@@ -239,22 +244,22 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
         submitOrderVO.setSummary(orderInfoVO);
         return  submitOrderVO;
     }
+
     @Override
     public SubmitOrderVO getPreNowOrderDetail(OrderPreQuery query) {
-        SubmitOrderVO submitOrderVO  = new SubmitOrderVO();
+        SubmitOrderVO submitOrderVO=new SubmitOrderVO();
+        //1、查询用户收货地址
+        List<UserAddressVO> addressList=getAddressListByUserId(query.getUserId(),query.getAddressId());
 
-        List<UserAddressVO> addressList = getAddressListByUserId(query.getUserId(),query.getAddressId());
+        List<UserOrderGoodsVO> goodList=new ArrayList<>();
 
-        List<UserOrderGoodsVO> goodsList = new ArrayList<>();
-
-        Goods goods = goodsMapper.selectById(query.getId());
-        if (goods == null){
+        //2、商品信息
+        Goods goods= goodsMapper.selectById(query.getId());
+        if (goods==null){
             throw new ServerException("商品信息不存在");
-
         }
         if (query.getCount()>goods.getInventory()){
             throw new ServerException(goods.getName()+"库存数量不足");
-
         }
         UserOrderGoodsVO userOrderGoodsVO = new UserOrderGoodsVO();
         userOrderGoodsVO.setId(goods.getId());
@@ -270,8 +275,9 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
         BigDecimal count = new BigDecimal(query.getCount().toString());
         userOrderGoodsVO.setTotalPrice(price.multiply(count).add(freight).doubleValue());
         userOrderGoodsVO.setTotalPayPrice(userOrderGoodsVO.getTotalPrice());
-        goodsList.add(userOrderGoodsVO);
+        goodList.add(userOrderGoodsVO);
 
+//       3、费用综述信息
         OrderInfoVO orderInfoVO = new OrderInfoVO();
         orderInfoVO.setGoodsCount(query.getCount());
         orderInfoVO.setTotalPayPrice(userOrderGoodsVO.getTotalPayPrice());
@@ -280,11 +286,11 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
         orderInfoVO.setDiscountPrice(goods.getDiscount());
 
         submitOrderVO.setUserAddresses(addressList);
-        submitOrderVO.setGoods(goodsList);
+        submitOrderVO.setGoods(goodList);
         submitOrderVO.setSummary(orderInfoVO);
         return submitOrderVO;
-
     }
+
     @Override
     public SubmitOrderVO getRepurchaseOrderDetail(Integer id) {
         SubmitOrderVO submitOrderVO = new SubmitOrderVO();
@@ -305,5 +311,38 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
         return submitOrderVO;
     }
 
+    @Override
+    public PageResult<OrderDetailVO> getOrderList(OrderQuery query) {
+        List<OrderDetailVO> list = new ArrayList<>();
+        Page<UserOrder> page = new Page<>(query.getPage(),query.getPageSize());
+
+        LambdaQueryWrapper<UserOrder> wrapper =new LambdaQueryWrapper<>();
+        wrapper.eq(UserOrder::getUserId,query.getUserId());
+        if (query.getOrderType() !=null && query.getOrderType()!=0){
+            wrapper.eq(UserOrder::getStatus,query.getOrderType());
+
+        }
+        wrapper.orderByDesc(UserOrder::getCreateTime);
+
+        List<UserOrder> orderRecords = baseMapper.selectPage(page,wrapper).getRecords();
+        if (orderRecords.size()==0){
+            return new PageResult<>(page.getTotal(),query.getPageSize(),query.getPage(),page.getPages(),list);
+
+        }
+        for (UserOrder userOrder :orderRecords){
+            OrderDetailVO orderDetailVO = UserOrderDetailConvert.INSTANCE.convertToORderDetailVO(userOrder);
+            UserShippingAddress userShippingAddress = userShippingAddressMapper.selectById(userOrder.getAddressId());
+            if (userShippingAddress != null){
+                orderDetailVO.setReceiverContact(userShippingAddress.getReceiver());
+                orderDetailVO.setReceiverAddress(userShippingAddress.getAddress());
+                orderDetailVO.setReceiverMobile(userShippingAddress.getContact());
+            }
+            List<UserOrderGoods> userOrderGoods = userOrderGoodsMapper.selectList(new LambdaQueryWrapper<UserOrderGoods>().eq(UserOrderGoods::getOrderId,userOrder.getId()));
+            orderDetailVO.setSkus(userOrderGoods);
+            list.add(orderDetailVO);
+
+        }
+        return new PageResult<>(page.getTotal(),query.getPageSize(),query.getPage(),page.getPages(),list);
+    }
 
 }

@@ -4,6 +4,7 @@ import com.soft2242.shop.entity.UserShoppingCart;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.soft2242.shop.vo.CartGoodsVO;
 import io.lettuce.core.dynamic.annotation.Param;
+import org.mapstruct.Mapper;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ import java.util.List;
  * @author xuchenyu12
  * @since 2023-11-08
  */
+
+@Mapper
 public interface UserShoppingCartMapper extends BaseMapper<UserShoppingCart> {
 List<CartGoodsVO> getCartGoodsInfo(@Param("id") Integer id);
 

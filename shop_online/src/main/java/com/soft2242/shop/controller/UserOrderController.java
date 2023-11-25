@@ -2,8 +2,10 @@ package com.soft2242.shop.controller;
 
 import com.alibaba.fastjson2.JSONObject;
 import com.soft2242.shop.common.exception.ServerException;
+import com.soft2242.shop.common.result.PageResult;
 import com.soft2242.shop.common.result.Result;
 import com.soft2242.shop.query.OrderPreQuery;
+import com.soft2242.shop.query.OrderQuery;
 import com.soft2242.shop.service.UserOrderService;
 import com.soft2242.shop.vo.OrderDetailVO;
 import com.soft2242.shop.vo.SubmitOrderVO;
@@ -73,5 +75,13 @@ public class UserOrderController {
         }
         SubmitOrderVO repurchaseOrderDetail = userOrderService.getRepurchaseOrderDetail(id);
         return Result.ok(repurchaseOrderDetail);
+    }
+    @Operation(summary = "订单列表")
+    @PostMapping("page")
+    public Result<PageResult<OrderDetailVO>> getOrderList(@RequestBody @Validated OrderQuery query, HttpServletRequest request) {
+        Integer userId = getUserId(request);
+        query.setUserId(userId);
+        PageResult<OrderDetailVO> orderList = userOrderService.getOrderList(query);
+        return Result.ok(orderList);
     }
 }

@@ -1,8 +1,10 @@
 package com.soft2242.shop.service;
 
+import com.soft2242.shop.common.result.PageResult;
 import com.soft2242.shop.entity.UserOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.soft2242.shop.query.OrderPreQuery;
+import com.soft2242.shop.query.OrderQuery;
 import com.soft2242.shop.vo.OrderDetailVO;
 import com.soft2242.shop.vo.SubmitOrderVO;
 import com.soft2242.shop.vo.UserAddressVO;
@@ -27,4 +29,6 @@ public OrderDetailVO getOrderDetail(Integer id);
     SubmitOrderVO getPreNowOrderDetail(OrderPreQuery query);
 
     SubmitOrderVO getRepurchaseOrderDetail(Integer id);
+    PageResult<OrderDetailVO> getOrderList(OrderQuery query);
+
 }
