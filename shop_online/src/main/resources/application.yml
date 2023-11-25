@@ -8,9 +8,11 @@ spring:
   datasource: # ????????
     type: com.zaxxer.hikari.HikariDataSource          # ??????HikariCP
     driver-class-name: com.mysql.cj.jdbc.Driver       # mysql ??
-    url: jdbc:mysql://127.0.0.1:3308/shop_online?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=GMT%2B8 # ?8?
+    #url: jdbc:mysql://8.140.194.3:3306/shop_online?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=GMT%2B8 # ?8?
+    url: jdbc:mysql://8.140.194.3:3306/shop_online?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=GMT%2B8 # ?8?
     username: root
-    password: 123456
+    #password: 123456
+    password: 123456aA
     hikari:
       connection-timeout: 30000       # ????????????(??)?????????????????SQLException,??30?
       minimum-idle: 5                 # ?????
