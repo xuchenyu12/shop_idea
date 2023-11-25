@@ -23,7 +23,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getAuthorizationInterceptor())
                 .addPathPatterns("/user/profile/**")
-                .addPathPatterns("/member/**").addPathPatterns("/cart/**");
+                .addPathPatterns("/member/**").addPathPatterns("/cart/**").addPathPatterns("/order/**");
        // registry.addInterceptor(getAuthorizationInterceptor()).addPathPatterns("/user/profile/**").addPathPatterns("/member/**");
     }
 }
