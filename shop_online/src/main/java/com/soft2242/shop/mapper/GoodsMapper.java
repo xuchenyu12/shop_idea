@@ -16,7 +16,7 @@ import java.util.List;
  * @author xuchenyu12
  * @since 2023-11-08
  */
-@Mapper
+
 public interface GoodsMapper extends BaseMapper<Goods> {
     List<UserOrderGoodsVO> getGoodsListByOrderId(@Param("id") Integer id);
 }
