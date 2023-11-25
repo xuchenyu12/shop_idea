@@ -3,7 +3,11 @@ package com.soft2242.shop.service;
 import com.soft2242.shop.entity.UserOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.soft2242.shop.vo.OrderDetailVO;
+import com.soft2242.shop.vo.SubmitOrderVO;
+import com.soft2242.shop.vo.UserAddressVO;
 import com.soft2242.shop.vo.UserOrderVO;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,5 +19,8 @@ import com.soft2242.shop.vo.UserOrderVO;
  */
 public interface UserOrderService extends IService<UserOrder> {
 Integer addGoodsOrder(UserOrderVO orderVO);
-    public OrderDetailVO getOrderDetail(Integer id);
+public OrderDetailVO getOrderDetail(Integer id);
+    List<UserAddressVO> getAddressListByUserId(Integer userId, Integer addressId);
+
+    SubmitOrderVO getPreOrderDetail(Integer userId);
 }
