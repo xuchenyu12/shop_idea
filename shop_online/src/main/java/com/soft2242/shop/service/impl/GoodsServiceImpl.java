@@ -94,8 +94,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         goodsVO.setSpecs(specificationsList);
         //商品规格详情
         List<GoodsSpecificationDetail> goodsSpecificationDetailList=goodsSpecificationDetailMapper.selectList(new LambdaQueryWrapper<GoodsSpecificationDetail>()
-                .eq(GoodsSpecificationDetail::getId,goods.getId()));
+                .eq(GoodsSpecificationDetail::getGoodsId,goods.getId()));
         goodsVO.setSkus(goodsSpecificationDetailList);
+
         //查找同类商品,去除自身
         List<Goods> goodsList = baseMapper.selectList(new LambdaQueryWrapper<Goods>().eq(Goods::getCategoryId,goods.getCategoryId()).ne(Goods::getId,goods.getId()));
         List<RecommendGoodsVO> recommendGoodsVOList=GoodsConvert.INSTANCE.convertToRecommendGoodsVOList(goodsList);

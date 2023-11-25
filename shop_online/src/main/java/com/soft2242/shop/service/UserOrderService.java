@@ -25,4 +25,6 @@ public OrderDetailVO getOrderDetail(Integer id);
 
     SubmitOrderVO getPreOrderDetail(Integer userId);
     SubmitOrderVO getPreNowOrderDetail(OrderPreQuery query);
+
+    SubmitOrderVO getRepurchaseOrderDetail(Integer id);
 }
