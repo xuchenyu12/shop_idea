@@ -370,6 +370,26 @@ public class UserOrderServiceImpl extends ServiceImpl<UserOrderMapper, UserOrder
         return orderDetailVO;
     }
 
+    @Override
+    @Transactional(rollbackFor =  Exception.class)
+    public void deleteOrder(List<Integer> ids, Integer userId) {
+        LambdaQueryWrapper<UserOrder> wrapper =new LambdaQueryWrapper<>();
+        wrapper.eq(UserOrder::getUserId,userId);
+        wrapper.eq(UserOrder::getStatus,OrderStatusEnum.WAITING_FOR_REVIEW.getValue()).or().eq(UserOrder::getStatus,
+                OrderStatusEnum.COMPLETED.getValue()).or().eq(UserOrder::getStatus,
+                OrderStatusEnum.CANCELLED.getValue());
+        List<UserOrder> userOrders = baseMapper.selectList(wrapper);
 
+        List<UserOrder> list = userOrders.stream().filter(item ->
+                ids.contains(item.getId())).collect(Collectors.toList());
+        if (list.size()==0){
+            throw new ServerException("暂无可以删除的订单");
+
+        }
+        removeByIds(list);
+        for (UserOrder userOrder : list){
+            userOrderGoodsMapper.delete(new LambdaQueryWrapper<UserOrderGoods>().eq(UserOrderGoods::getOrderId,userOrder.getId()));
+        }
+    }
 }
 

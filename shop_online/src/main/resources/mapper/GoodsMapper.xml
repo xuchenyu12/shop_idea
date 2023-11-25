@@ -23,7 +23,8 @@
         <result column="update_time" property="updateTime" />
     </resultMap>
     <select id="getGoodsListByOrderId" resultType="com.soft2242.shop.vo.UserOrderGoodsVO">
-        select g.id,g.price,g.name,g.cover, as pricture,og.count,og.attrs_text,og.price as payPrice,g.price *
+        select g.id,g.price,g.cover,g.name,g.cover, as pricture,og.count,og.attrs_text,og.price as
+            payPrice,g.price *
             og.count as
             totalPrice,
             og.price * og.count as totalPayPrice from t_goods as g
