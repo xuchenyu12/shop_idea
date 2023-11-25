@@ -9,6 +9,7 @@ import com.soft2242.shop.query.OrderPreQuery;
 import com.soft2242.shop.query.OrderQuery;
 import com.soft2242.shop.service.UserOrderService;
 import com.soft2242.shop.vo.OrderDetailVO;
+import com.soft2242.shop.vo.OrderLogisticVO;
 import com.soft2242.shop.vo.SubmitOrderVO;
 import com.soft2242.shop.vo.UserOrderVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -99,5 +100,41 @@ public class UserOrderController {
         Integer userId = getUserId(request);
         userOrderService.deleteOrder(ids, userId);
         return Result.ok();
+    }
+    @Operation(summary = "支付订单")
+    @GetMapping("pay")
+    public Result payOrder(@RequestParam Integer id) {
+        if (id == null) {
+            throw new ServerException("订单不存在");
+        }
+        userOrderService.payOrder(id);
+        return Result.ok();
+    }
+    @Operation(summary = "确认收货")
+    @PutMapping("receipt")
+    public Result<OrderDetailVO> receiptOrder(@RequestParam Integer id) {
+        if (id == null) {
+            throw new ServerException("订单不存在");
+        }
+        OrderDetailVO orderDetailVO = userOrderService.receiptOrder(id);
+        return Result.ok(orderDetailVO);
+    }
+    @Operation(summary = "模拟发货")
+    @GetMapping("consignment")
+    public Result consignOrder(@RequestParam Integer id) {
+        if (id == null) {
+            throw new ServerException("订单不存在");
+        }
+        userOrderService.consignOrder(id);
+        return Result.ok();
+    }
+    @Operation(summary = "获取物流信息")
+    @GetMapping("logistics")
+    public Result<OrderLogisticVO> getOrderLogistics(@RequestParam Integer id) {
+        if (id == null) {
+            throw new ServerException("订单不存在");
+        }
+        OrderLogisticVO orderLogistics = userOrderService.getOrderLogistics(id);
+        return Result.ok(orderLogistics);
     }
 }
